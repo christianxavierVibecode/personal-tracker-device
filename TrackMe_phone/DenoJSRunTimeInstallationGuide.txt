@@ -1,0 +1,6 @@
+==========
+DENO INSTALLATION
+echo 'export DENO_INSTALL="$HOME/.deno"' >> ~/.bashrc
+echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> ~/.bashrc
+
+source ~/.bashrc

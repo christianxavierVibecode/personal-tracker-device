@@ -1,0 +1,173 @@
+==================================================
+DOKUMENTASI FUNGSI CUSTOM TERMUX (.sh)
+==================================================
+
+Dokumentasi ini menjelaskan kumpulan script custom
+berbasis Termux + Termux:API yang dijalankan melalui
+alias untuk keperluan tracking, pencarian, dan respon
+ketika handphone hilang atau tidak berada di dekat user.
+
+--------------------------------------------------
+PERSIAPAN AWAL
+--------------------------------------------------
+1. Install Termux dan Termux:API
+2. Jalankan:
+   pkg install termux-api openssh
+3. Jalankan:
+   termux-setup-storage
+4. Pastikan semua file .sh sudah executable:
+   chmod +x ~/namafile.sh
+5. Tambahkan alias di ~/.bashrc lalu:
+   source ~/.bashrc
+
+--------------------------------------------------
+1. foto.sh
+--------------------------------------------------
+FUNGSI:
+Mengambil foto menggunakan kamera depan dan kamera
+belakang secara otomatis. Nama file menggunakan
+timestamp (waktu sekarang) agar tidak terjadi duplikasi.
+File disimpan sebagai bukti visual.
+
+PERINTAH API YANG DIGUNAKAN:
+- termux-camera-photo
+
+PERINTAH INTERNAL:
+- date (untuk timestamp)
+- mkdir (membuat direktori jika belum ada)
+
+CARA MENJALANKAN:
+foto
+
+HASIL:
+Dua file foto tersimpan di:
+~/storage/downloads/termuxFiles/termuxFiles/
+
+--------------------------------------------------
+2. mulairekam.sh
+--------------------------------------------------
+FUNGSI:
+Memulai perekaman suara dari microphone handphone.
+Nama file otomatis menggunakan timestamp sehingga
+setiap rekaman unik.
+
+PERINTAH API YANG DIGUNAKAN:
+- termux-microphone-record -f
+
+CARA MENJALANKAN:
+mulairekam
+
+HASIL:
+File rekaman .wav tersimpan di:
+~/storage/downloads/termuxFiles/termuxFiles/
+
+--------------------------------------------------
+3. stoprekam.sh
+--------------------------------------------------
+FUNGSI:
+Menghentikan proses perekaman suara yang sedang
+berjalan. Tidak memerlukan nama file karena file
+sudah ditentukan saat mulairekam dijalankan.
+
+PERINTAH API YANG DIGUNAKAN:
+- termux-microphone-record -q
+
+CARA MENJALANKAN:
+stoprekam
+
+--------------------------------------------------
+4. play.sh
+--------------------------------------------------
+FUNGSI:
+Memutar file audio "playme.mp3" untuk membantu
+menemukan posisi handphone secara langsung.
+Script ini juga memaksa volume media ke level
+maksimal walaupun sebelumnya disetel ke 0.
+
+PERINTAH API YANG DIGUNAKAN:
+- termux-media-player play
+- termux-volume music
+
+CATATAN:
+File playme.mp3 harus berada di direktori HOME
+yang sama dengan file play.sh.
+
+CARA MENJALANKAN:
+play
+
+--------------------------------------------------
+5. senter.sh
+--------------------------------------------------
+FUNGSI:
+Menyalakan flashlight handphone secara kedap-kedip
+(dalam infinite loop). Berguna untuk menemukan
+handphone di tempat gelap dan berisik seperti SAWAH pada malam hari.
+
+PERINTAH API YANG DIGUNAKAN:
+- termux-torch on
+- termux-torch off
+
+MEKANISME:
+- Menggunakan loop tak terbatas (while true)
+- PID disimpan agar bisa dihentikan secara aman
+
+CARA MENJALANKAN:
+senter
+
+--------------------------------------------------
+6. stopsenter.sh
+--------------------------------------------------
+FUNGSI:
+Menghentikan proses senter kedap-kedip yang
+dijalankan oleh senter.sh.
+
+PERINTAH YANG DIGUNAKAN:
+- kill (berdasarkan PID)
+- termux-torch off
+
+CARA MENJALANKAN:
+stopsenter
+
+--------------------------------------------------
+7. getar.sh
+--------------------------------------------------
+FUNGSI:
+Membuat handphone bergetar secara terus-menerus.
+Berguna jika handphone berada di sekitar user
+namun tidak terlihat.
+
+PERINTAH API YANG DIGUNAKAN:
+- termux-vibrate
+
+MEKANISME:
+- Infinite loop
+- PID disimpan ke file sementara
+
+CARA MENJALANKAN:
+getar
+
+--------------------------------------------------
+8. stopgetar.sh
+--------------------------------------------------
+FUNGSI:
+Menghentikan getaran yang dijalankan oleh getar.sh
+dengan membunuh proses berdasarkan PID.
+
+PERINTAH YANG DIGUNAKAN:
+- kill
+
+CARA MENJALANKAN:
+stopgetar
+
+--------------------------------------------------
+CATATAN KEAMANAN & PENGGUNAAN
+--------------------------------------------------
+- Semua script dijalankan secara sadar oleh pemilik
+  device melalui SSH / Termux.
+- Tidak melakukan keylogging atau spying ilegal.
+- Cocok digunakan bersama Tailscale + SSH.
+- Direkomendasikan hanya untuk device milik sendiri.
+
+==================================================
+AKHIR DOKUMENTASI
+==================================================

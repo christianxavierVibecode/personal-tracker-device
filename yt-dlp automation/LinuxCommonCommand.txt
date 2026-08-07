@@ -1,0 +1,4 @@
+df -h
+gh codespace view
+gh codespace list
+passwd

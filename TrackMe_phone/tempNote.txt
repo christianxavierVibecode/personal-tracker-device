@@ -1,0 +1,54 @@
+ffmpeg -i input_video.mp4 -i gambar_thumbnail.jpg -map 0 -map 1 -c copy -disposition:v:1 attached_pic output_video.mp4
+
+yt-dlp -f bestaudio -o "%(title)s.mp3" -i "URL PLAYLIST VIDEO"
+yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "URL_PLAYLIST" --cookies my_cookies.txt
+
+Perintah untuk men-satukan file video.mp4 dengan thumbnail :
+ffmpeg -i video.mp4 -i audio.mp3 -map 0:v:0 -map 1:a:0 -map 0:v:1? -c:v copy -c:a aac -b:a 128k -disposition:v:1 attached_pic -map_metadata 0 hasil_gabung_fixed.mp4
+
+Perintah untuk men-satukan file video.mp4 dengan audio.mp3 dan video sudah memiliki thumbnail :
+ffmpeg -i video.mp4 -i audio.mp3 -map 0:v:0 -map 1:a:0 -map 0:v:1? -c:v copy -c:a aac -b:a 128k -disposition:v:1 attached_pic -map_metadata 0 hasil_gabung_fixed.mp4
+
+Perintah untuk cek apakah video ada suara (linux only) :
+for f in *.mp4; do 
+    ffprobe -v error -select_streams a -show_entries stream=codec_type -of csv=p=0 "$f" | grep -q "audio" && echo "$f audio" || echo "$f"; 
+done
+
+Perintah untuk download file suara apabila tidak ada :
+yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "URL_PLAYLIST" --cookies my_cookies.txt
+
+Perintah untuk konversi webm ke mp4 :
+ffmpeg -i input.webm -c:v libx264 -crf 23 -c:a aac -b:a 128k output.mp4
+
+script untuk menyatukan file video, audio dan thumbnail dengan ffmpeg :
+Video + Audio + thumbnail:
+for video in *.mp4; do basename="${video%.mp4}"; audio="${basename}.mp3"; thumb="${basename}.png"; output="HASIL_${video}"; if [[ -f "$audio" && -f "$thumb" ]]; then ffmpeg -i "$video" -i "$audio" -i "$thumb" -map 0:v:0 -map 1:a:0 -map 2:v:0 -c:v copy -c:a copy -c:v:1 png -disposition:v:1 attached_pic -map_metadata 0 "$output" -y; elif [[ -f "$audio" ]]; then ffmpeg -i "$video" -i "$audio" -map 0:v:0 -map 1:a:0 -c:v copy -c:a copy -map_metadata 0 "$output" -y; fi; done
+
+Video + Audio saja :
+for v in *.mp4; do b="${v%.mp4}"; a="$b.mp3"; t="$b.png"; out="HASIL_$v"; if [[ -f "$a" && -f "$t" ]]; then ffmpeg -i "$v" -i "$a" -i "$t" -map 0:v:0 -map 1:a:0 -map 2:v:0 -c:v copy -c:a copy -c:v:1 png -disposition:v:1 attached_pic -map_metadata 0 "$out" -y; elif [[ -f "$a" ]]; then ffmpeg -i "$v" -i "$a" -map 0:v:0 -map 1:a:0 -c:v copy -c:a copy -map_metadata 0 "$out" -y; fi; done
+
+Menghapus semua file yang berakhiran .webm di dalam folder :
+rm *.webm
+
+Menghapus semua file yang selain di awali dengan karakter "HASIL_" di dalam folder :
+find . -maxdepth 1 -type f ! -name "HASIL_*" -delete
+
+Merename semua file dengan ekstensi webm menjadi mp4 :
+for f in *.webm; do mv "$f" "${f%.webm}.mp4"; done
+
+Melihat jumlah file mp4 di direktori saat ini :
+ls -1 *.mp4 | wc -l
+
+Mengupdate yt-dlp ke nightly version :
+yt-dlp --update-to nightly
+
+	Jika error "ERROR: You installed yt-dlp with pip or using the wheel from PyPi; Use that to update", jalankan : python3 -m pip install -U --pre "yt-dlp[default]"
+
+Menjalankan suatu perintah secara looping (10 detik) :
+watch -n 10 'ls -1 *.mp4 | wc -l'
+watch -tn 10 'ls -1 *.mp4 | wc -l'
+
+Melihat free disk di linux :
+df -h
+
+taildrive

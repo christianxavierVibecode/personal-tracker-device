@@ -1,0 +1,10 @@
+scp -P 2222 -r codespace@100.87.205.37:/workspaces/Vps-Demo/sharedFiles/"HASIL_Belajar Laravel 8 ｜ 1. Intro.mp4" C:\codespacesVpsFiles\
+
+scp -P 2222 codespace@100.87.205.37:/workspaces/Vps-Demo/sharedFiles/"HASIL_Belajar Laravel 8 ｜ 1. Intro.mp4" C:\codespacesVpsFiles\
+
+rsync -avh --progress -e "ssh -p 2222" codespace@100.87.205.37:'/workspaces/Vps-Demo/sharedFiles/"HASIL_Belajar Laravel 8 ｜ 1. Intro.mp4"' C:\codespacesVpsFiles\
+rsync -avh --progress -e "ssh -p 2222" codespace@100.87.205.37:'/workspaces/Vps-Demo/sharedFiles/"HASIL_Belajar Laravel 8 ｜ 1. Intro.mp4"' /c/codespacesVpsFiles/
+
+
+# Jalankan ini di PowerShell Windows 10
+scp -P 2222 "codespace@100.87.205.37:/workspaces/Vps-Demo/sharedFiles/HASIL_Belajar Laravel 8 ｜ 1. Intro.mp4" C:\codespacesVpsFiles\

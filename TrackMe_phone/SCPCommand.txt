@@ -1,0 +1,6 @@
+PHONE :
+scp -r u0_a370@android-phone:~/storage/downloads/termuxFiles ~/storage/shared/TermuxFiles/
+
+
+LAPTOP :
+scp -r u0_a370@nama-device-tailscale:~/storage/downloads/termuxFiles C:\TermuxFiles\

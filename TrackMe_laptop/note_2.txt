@@ -1,0 +1,6 @@
+AUTO OPEN GOOGLE MAPS :
+powershell -NoProfile -Command "Add-Type -AssemblyName System.Device; $g = New-Object System.Device.Location.GeoCoordinateWatcher; $g.Start(); while ($g.Status -ne 'Ready') { Start-Sleep -Milliseconds 200 }; $l = $g.Position.Location; Start-Process \"https://maps.google.com/?q=$($l.Latitude),$($l.Longitude)\""
+
+============
+SHOW THE CURRENT LOCATION :
+powershell -Command "Add-Type -AssemblyName System.Device;$g=New-Object System.Device.Location.GeoCoordinateWatcher;$g.Start();while($g.Status -ne 'Ready'){Start-Sleep -Milliseconds 200};$l=$g.Position.Location; \"$($l.Latitude),$($l.Longitude)\""

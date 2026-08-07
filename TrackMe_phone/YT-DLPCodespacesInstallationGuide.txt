@@ -1,0 +1,17 @@
+==============
+INSTALASI YT-DLP PADA CODESPACES
+sudo apt update && sudo apt upgrade -y
+sudo apt install ffmpeg -y
+sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+sudo chmod a+rx /usr/local/bin/yt-dlp
+yt-dlp --version
+
+===============
+VERSI 2 DENGAN MENGGUNAKAN PIP
+sudo apt install python3
+sudo apt install python3-pip
+python3 -m pip install --upgrade pip
+pip install yt-dlp
+sudo apt-get update
+sudo apt-get install -y ffmpeg
+yt-dlp "URL_VIDEO_YOUTUBE"

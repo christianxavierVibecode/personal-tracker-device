@@ -1,0 +1,85 @@
+NOTE
+user ssh android 		: u0_a370
+pw user ssh android 		: 12345
+ip user ssh android tailscale 	: 100.95.87.53
+user ssh android		: oppo-cph2631.taileec181.ts.net
+
+user ssh pc		: admin
+pw user ssh pc		: 123
+ip user ssh pc		: 100.66.222.3
+user ssh pc		: adm-christian-xavier.taileec181.ts.net 
+
+==============================
+SSH BERKERJA DENGAN BEBERAPA STEP
+TCP Connection (Buka Pintu)
+Version Exchange (Sapaan)
+Algorithm Negotiation (Pilih Kode)
+Key Exchange (Tukar Gembok)
+Server Auth (Cek Teman)
+User Auth (Cek KTP)
+Secure Shell (Obrolan Aman) 
+===============================
+gh codespace rebuild	=> untuk restart codespace
+gh codespace stop 	=> untuk shutdown codespace
+================================
+INSTALASI SSH
+sudo apt update && sudo apt upgrade -y
+sudo apt install openssh-server openssh-client -y
+ssh -V
+sudo service ssh status
+	jika belum running, jalankan : sudo service ssh start
+	jika ingin di-restart, jalankan : sudo service ssh restart
+
+sudo adduser sshuser
+sudo usermod -aG sudo sshuser
+================================
+INSTALASI TAILSCALE 
+curl -fsSL https://tailscale.com/install.sh | sh
+	apabila gagal gunakan perintah :
+	curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/jammy.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg > /dev/null
+	curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/jammy.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
+	sudo apt update
+	sudo apt install tailscale -y
+tailscale version
+
+sudo tailscaled --tun=userspace-networking &
+sudo tailscale up	=> akan muncul sebuah link untuk login
+================================
+INSTALASI SSH & TAILSCALE DI TERMUX
+pkg update && pkg upgrade -y
+pkg install openssh -y
+passwd
+sshd
+Kalau ada masalah host keys belum dibuat, jalankan:
+	ssh-keygen -A
+	sshd	
+
+Install aplikasi Tailscale dari F-Droid:
+Link F-Droid Tailscale: https://f-droid.org/id/packages/com.tailscale.ipn/
+
+
+OTHERS
+dpkg -l | grep ssh 	=> melihat package apa yang telah di install di linux dan mengambil nama package tertentu (misalnya ssh)
+type namafile.txt	=> perintah untuk melihat isi dari file txt, mirip nano tapi di windows
+Perintah untuk melihat apakah service ssh itu berjalan di termux :
+	Perintah 1	=> pgrep sshd (muncul angka (PID) berarti ssh sedang aktif)
+	Perintah 2 	=> ps aux | grep sshd (/usr/bin/sshd)
+	Perintah 3 	=> ss -nlt (biasanya port 8022)
+	Perintah 4 	=> ssh localhost -p 8022 (testing sendiri)
+Cek ssh di laptop	=> Get-Service sshd
+Run ssh di laptop	=> Start-Service sshd
+Matikan ssh di termux	=> Stop-Service sshd
+Restart ssh di laptop	=> Restart-Service sshd
+Disable ssh auto start	=> Set-Service sshd -StartupType Disabled
+Enable ssh auto start	=> Set-Service sshd -StartupType Automatic
+
+Cek ssh di termux	=> ps aux | grep sshd
+Run ssh di termux	=> sshd
+Matikan ssh di termux	=> pkill sshd
+Restart ssh di termux	=> pkill sshd && sshd
+
+
+
+
+
+

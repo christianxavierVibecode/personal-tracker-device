@@ -1,0 +1,161 @@
+SpreadSheet Perintah Trackme :
+💻 SISI LAPTOP :
+1. KONEK KE HANDPHONE :
+phone
+
+2. TRACK LOKASI :
+trackphone
+==============================
+📱 SISI LAPTOP :
+1. KONEK KE LAPTOP :
+laptop
+
+2. TRACK LOKASI :
+tracklaptop
+
+==============================
+CATATAN PERINTAH TERMUX:API
+==============================
+
+#1. INFORMASI AUDIO & MEDIA
+termux-audio-info
+
+#2. MEMUTAR / MENGONTROL AUDIO
+termux-media-player
+
+	# Memutar file audio bernama file.mp3
+	termux-media-player play file.mp3
+
+	# Mempause file audio yang di putar
+	termux-media-player pause
+
+	# Menghentikan file audio yang di putar
+	termux-media-player stop
+
+#3. MEREKAM SUARA DARI MICROPHONE
+termux-microphone-record
+
+	# Memulai rekaman dan simpan di file rekam.wav
+	termux-microphone-record -f rekam.wav
+
+	# Menghentikan rekaman dan menyimpannya di file rekam.wav
+	termux-microphone-record -q
+
+
+#4. INFORMASI KAMERA
+termux-camera-info
+
+#5. MENGAMBIL FOTO (DEPAN / BELAKANG)
+termux-camera-photo
+
+	# Mengambil foto dari KAMERA LUAR + simpan sebagai foto.jpg
+	termux-camera-photo foto.jpg
+
+	# Mengambil foto dari KAMERA DALAM + simpan sebagai selfie.jpg
+	termux-camera-photo -c 1 selfie.jpg
+
+#6. MENAMPILKAN NOTIFIKASI ANDROID
+termux-notification
+
+#7. POPUP TOAST ANDROID
+termux-toast
+
+#8. DIALOG INTERAKTIF (INPUT USER)
+termux-dialog
+
+#9. GET ISI CLIPBOARD
+termux-clipboard-get
+
+#10. SET ISI CLIPBOARD
+termux-clipboard-set
+
+#11. MENGAMBIL LOKASI GPS
+termux-location
+
+	# Ambil data lokasi dari gps (lebih akurat)
+	termux-location -p gps
+
+	# Ambil data lokasi dari AP 
+	termux-location -p network
+
+#12. INFORMASI SENSOR DEVICE
+termux-sensor
+
+#13. STATUS BATERAI
+termux-battery-status
+
+#14. MENGATUR KECERAHAN LAYAR
+termux-brightness
+
+#15. GETAR PERANGKAT
+termux-vibrate -d 1000 (1 detik)
+
+#16. MENYALAKAN / MEMATIKAN FLASHLIGHT (SENTER)
+termux-torch on
+termux-torch off
+
+#17. INFORMASI WIFI TERHUBUNG
+termux-wifi-connectioninfo
+
+#18. SCAN WIFI SEKITAR
+termux-wifi-scaninfo
+
+#19. INFORMASI PERANGKAT TELEPON
+termux-telephony-deviceinfo
+
+#20. INFORMASI JARINGAN SELULER
+termux-telephony-cellinfo
+
+#21. MELIHAT RIWAYAT PANGGILAN
+termux-call-log
+
+#22. MELIHAT DAFTAR SMS
+termux-sms-list
+
+#23. MENGIRIM SMS
+termux-sms-send
+
+#24. MENGAMBIL FILE DARI STORAGE ANDROID
+termux-storage-get
+
+#25. SHARE FILE / TEXT KE APLIKASI LAIN
+termux-share
+
+#26. MENGONTROL KEYBOARD ANDROID
+termux-keyboard
+
+#27. MENJADWALKAN BACKGROUND JOB
+termux-job-scheduler
+
+#28. AUTENTIKASI FINGERPRINT
+termux-fingerprint
+
+#29. INFORMASI TERMUX & SISTEM
+termux-info
+
+#30. MEMBUKA FILE ATAU APLIKASI
+termux-open
+
+#31. MEMBUKA URL
+termux-open-url
+
+#32. MENGGANTI WALLPAPER
+termux-wallpaper
+
+#33. INFORMASI USB
+termux-usb
+
+#34. AKSES NFC
+termux-nfc
+
+#35. MENGATUR LEVEL VOLUME AUDIO
+termux-volume
+
+termux-volume ring 15 			=> volume nada dering
+termux-volume alarm 15 			=> volume alarm
+termux-volume notification 15	=> volume notifikasi
+
+# Untuk Menaikkan volume utama, kita harus mem-play file audio
+termux-media-player play playme.mp3
+sleep 1
+termux-volume music 200
